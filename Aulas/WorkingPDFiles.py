@@ -1,6 +1,6 @@
 import PyPDF2
 
-myfile = open('UPDATED_NLP_COURSE/00-Python-Text-Basics/US_Declaration.pdf', mode='rb')
+myfile = open('../UPDATED_NLP_COURSE/00-Python-Text-Basics/US_Declaration.pdf', mode='rb')
 # pdf_reader = PyPDF2.PdfFileReader(myfile)
 # print(pdf_reader.numPages)
 # page1 = pdf_reader.getPage(0)

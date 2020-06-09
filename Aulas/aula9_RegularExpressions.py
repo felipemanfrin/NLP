@@ -15,7 +15,7 @@ import re #importando regular expression library
 # my_match.start()
 # my_match.end()
 
-text = 'my phone is a new phone'
+'''text = 'my phone is a new phone'
 pattern = 'phone'
 match = re.search(pattern, text)
 print(match.span())
@@ -23,4 +23,21 @@ print(re.findall('phone', text))#encontro todas palavras iguais
 all_matches = re.findall('phone', text)
 print(len(all_matches))
 for word in re.finditer('phone', text):#nessa aqui estamos pegando o começo e o fim de cada palavra desejada
+    print(word.span())'''
+
+text = 'My phone number is 19-99658-7707 and my other number is 19-99658-8808'
+pattern = r'\d\d-\d\d\d\d\d-\d\d\d\d'
+phonen = re.search(pattern,text)
+print(phonen)
+print(phonen.group())
+
+phone2 = re.findall(r'\d\d-\d\d\d\d\d-\d\d\d\d',text)#modo resumido r'\d{3}-d{5}-d{4}'
+print(phone2)
+for word in re.finditer(r'\d\d-\d\d\d\d\d-\d\d\d\d',text):
     print(word.span())
+for word in phone2:
+    print(word)
+    if '19-' in word:
+        print(True)
+    else:
+        print(False)

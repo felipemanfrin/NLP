@@ -27,17 +27,25 @@ for word in re.finditer('phone', text):#nessa aqui estamos pegando o começo e o
 
 text = 'My phone number is 19-99658-7707 and my other number is 19-99658-8808'
 pattern = r'\d\d-\d\d\d\d\d-\d\d\d\d'
+pattern2 = r'\d'
 phonen = re.search(pattern,text)
-print(phonen)
-print(phonen.group())
+# print(phonen)
+# print(phonen.group())
 
 phone2 = re.findall(r'\d\d-\d\d\d\d\d-\d\d\d\d',text)#modo resumido r'\d{3}-d{5}-d{4}'
-print(phone2)
-for word in re.finditer(r'\d\d-\d\d\d\d\d-\d\d\d\d',text):
-    print(word.span())
-for word in phone2:
+# print(phone2)
+# for word in re.finditer(r'\d\d-\d\d\d\d\d-\d\d\d\d',text):
+#     print(word.span())
+# for word in phone2:
+#     print(word)
+#     if '19-' in word:
+#         print(True)
+#     else:
+#         print(False)
+for word in text:
     print(word)
-    if '19-' in word:
-        print(True)
-    else:
+    if word == r'\d' and r'\w':
         print(False)
+    else:
+        print(True)
+

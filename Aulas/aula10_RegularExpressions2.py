@@ -24,10 +24,29 @@ print(re.findall(r'[^\d]+',frase)) #impreme sem os numeros em conjuntos e não p
 #     for letra in palavra:
 #         print(letra)
 
-'''text_phrase = 'This is a string! but it has puncutation. How to remove it?'
+text_phrase = 'This is a string! but it has puncutation. How to remove it?'
 mylist = re.findall(r'[^!.?]+', text_phrase)
 print(mylist)
-print(' '.join(mylist))'''
+print(' '.join(mylist))
 
-text = 'Only find the hypen-words. Were the long-ish dash words?'
-print(re.findall(r'[\w]+-[\w]+',text))# quando nao tem o ^ dentro do [] voce procupra por um numero x de paramentros que voce colocou dentro do []. não preciso especificar o tamanho da string que busco
+# text = 'Only find the hypen-words. Were the long-ish dash words?'
+# print(re.findall(r'[\w]+-[\w]+',text))# quando nao tem o ^ dentro do [] voce procupra por um numero x de paramentros que voce colocou dentro do []. não preciso especificar o tamanho da string que busco
+
+"""Character	Description	Example Pattern Code	Exammple Match
+\d	A digit	file_\d\d	file_25
+\w	Alphanumeric	\w-\w\w\w	A-b_1
+\s	White space	a\sb\sc	a b c
+\D	A non digit	\D\D\D	ABC
+\W	Non-alphanumeric	\W\W\W\W\W	*-+=)
+\S	Non-whitespace	\S\S\S\S	Yoyo
+
+
+Character	Description	Example Pattern Code	Exammple Match
++	Occurs one or more times	Version \w-\w+	Version A-b1_1
+{3}	Occurs exactly 3 times	\D{3}	abc
+{2,4}	Occurs 2 to 4 times	\d{2,4}	123
+{3,}	Occurs 3 or more	\w{3,}	anycharacters
+\*	Occurs zero or more times	A\*B\*C*	AAACC
+?	Once or none	plurals?	plural
+
+"""

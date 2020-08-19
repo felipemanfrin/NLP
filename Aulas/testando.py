@@ -91,6 +91,17 @@
 # gmovies = [title for title in movies if title.startswith('s')]
 # print(gmovies)
 
-movies = [('cidadao kane', 1941), ('cidade de deus', 2000), ('Bela dormecida', 2005), ('pinoquio', 1991), ('tartaruga ninja', 1995)]
-gmovies = [title for (title, ano) in movies if ano < 2000]
-print(gmovies)
+# movies = [('cidadao kane', 1941), ('cidade de deus', 2000), ('Bela dormecida', 2005), ('pinoquio', 1991), ('tartaruga ninja', 1995)]
+# gmovies = [title for (title, ano) in movies if ano < 2000]
+# print(gmovies)
+
+dicionario = {}
+x = {'felipe', 'vanessa', 'shiva'}
+i = 1
+for word in x:
+    if word in dicionario:
+        continue
+    else:
+        dicionario[word] = i
+        i += 1
+print(dicionario)

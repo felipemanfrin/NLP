@@ -86,34 +86,75 @@ import numpy as np
 #____________________________________________________________________________________
 #agora vamos contar a quantidade de palavras que temos repetidas em todos nosssos textos
 import numpy as np
+# import pandas as pd
+#
+# df = pd.read_csv('../textos/smsspamcollection.tsv', sep='\t')
+# # print(df.head())
+# # print(df.isnull().sum())#aqui voce encontrara se temos algum valor faltando, se der tudo zero porque nao falta nada mas esse comando não confere se tem alguma string vazia '  '
+# # print('-------------------------------------------------------------------------')
+# # print(df['label'].value_counts())
+#
+# from sklearn.model_selection import train_test_split
+# X = df['message']
+# y = df['label']
+# X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
+# from sklearn.feature_extraction.text import CountVectorizer
+# count_vect = CountVectorizer()
+# # print(X)# aqui o texto sai sem estar formatado bonitinho
+# # #então temos que FIT o vectorizes na data (construindo o vocab, cu contar o numero de palavras
+# # count_vect.fit(X_train)#primeiro temos que encaixar (FIT)
+# # X_train_counts = count_vect.transform(X_train)#depois temos que tranformar
+# # #vamos transformar a mensagem original na mensagem de texto no vetor finalizando a etapa de 'FIT TRANSFORM'
+#
+# X_train_counts = count_vect.fit_transform(X_train)# já aqui podemos fazer o de cima em uma linha somente
+# # print(X_train_counts)
+# print(X_train_counts.shape)
+# from sklearn.feature_extraction.text import TfidfTransformer
+# tfidf_transformer = TfidfTransformer()
+# X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
+# print(X_train_tfidf.shape)
+# from sklearn.feature_extraction.text import TfidfVectorizer
+# vectorizer = TfidfVectorizer()
+# X_train_tfidf = vectorizer.fit_transform(X_train)
+# from sklearn.svm import LinearSVC# para treinar o classifier
+# clf = LinearSVC()
+# print(clf.fit(X_train_tfidf, y_train))
+# from sklearn.pipeline import Pipeline
+# text_clf = Pipeline([('tfidf', TfidfVectorizer()), ('clf', LinearSVC())])#essa pipeline vai ter uma lista de tuplas, vai ser meu text classifier. vectorisa e classifica em uma linha
+# print(text_clf.fit(X_train, y_train))
+# predictions = text_clf.predict(X_test)
+# from sklearn.metrics import confusion_matrix, classification_report
+# print(confusion_matrix(y_test, predictions))
+# print(classification_report(y_test, predictions))
+# print(text_clf.predict(['SUp bro send me dic pic']))# para ver se essa frase eh predictada como ham spam
+#____________________________________________________________________________________
+import numpy as np
 import pandas as pd
+df = pd.read_csv('../textos/moviereviews.tsv', sep='\t')
+print(df.head())
+print(len(df))#aqui nos temos quantos reviews
+print(df.isnull().sum())#quando desses reviews estao vazios
+df.dropna(inplace=True)#dropa todos os reviews vazios
+print(df.isnull().sum())
 
-df = pd.read_csv('../textos/smsspamcollection.tsv', sep='\t')
-# print(df.head())
-# print(df.isnull().sum())#aqui voce encontrara se temos algum valor faltando, se der tudo zero porque nao falta nada mas esse comando não confere se tem alguma string vazia '  '
-# print('-------------------------------------------------------------------------')
-# print(df['label'].value_counts())
-
+blanks = []
+for i, lb, rv in df.itertuples():
+    if rv.isspace():
+        blanks.append(i)
+print(blanks)
+df.drop(blanks, inplace=True)
+print(len(df))
 from sklearn.model_selection import train_test_split
-X = df['message']
+X = df['review']
 y = df['label']
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.33, random_state=42)
-from sklearn.feature_extraction.text import CountVectorizer
-count_vect = CountVectorizer()
-# print(X)# aqui o texto sai sem estar formatado bonitinho
-# #então temos que FIT o vectorizes na data (construindo o vocab, cu contar o numero de palavras
-# count_vect.fit(X_train)#primeiro temos que encaixar (FIT)
-# X_train_counts = count_vect.transform(X_train)#depois temos que tranformar
-# #vamos transformar a mensagem original na mensagem de texto no vetor finalizando a etapa de 'FIT TRANSFORM'
-
-X_train_counts = count_vect.fit_transform(X_train)# já aqui podemos fazer o de cima em uma linha somente
-# print(X_train_counts)
-print(X_train_counts.shape)
-from sklearn.feature_extraction.text import TfidfTransformer
-tfidf_transformer = TfidfTransformer()
-X_train_tfidf = tfidf_transformer.fit_transform(X_train_counts)
-print(X_train_tfidf.shape)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+from sklearn.pipeline import Pipeline
 from sklearn.feature_extraction.text import TfidfVectorizer
-vectorizer = TfidfVectorizer
-X_train_tfidf = vectorizer.fit_transform(X_train)
-from sklearn.svm import LinearSVC# para treinar o classifier
+from sklearn.svm import LinearSVC
+text_clf = Pipeline([('tfidf', TfidfVectorizer()), ('clf', LinearSVC())])
+text_clf.fit(X_train, y_train)
+predictions = text_clf.predict(X_test)
+from sklearn.metrics import confusion_matrix, classification_report, accuracy_score
+print(confusion_matrix(y_test, predictions))
+print(classification_report(y_test, predictions))
+print(accuracy_score(y_test, predictions))

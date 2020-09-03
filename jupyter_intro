@@ -1,0 +1,82 @@
+Anaconda contém o conda(https://conda.io/en/latest/) e o navegador anaconda
+
+Para criar o ambiente da anaconda digite: “conda env create -f ‘nomedoarquivoCONDA’
+
+
+Para iniciar abra o prompt anaconda e digite “ conda activate nlp_course ” e para desativar “ conda deactivate “.
+E para abrir na página do Jupyter digite “ jupyter notebook “
+
+Slides : https://drive.google.com/drive/folders/1ignykpRUm2P5dEYOWVL8mTYbwUhZVGFf?usp=sharing
+Certificado no fim : https://support.udemy.com/hc/en-us/articles/229603868-Certificate-of-Completion
+
+Para printar e listinha :
+library = [('Author', 'Topic', 'Pages'), ('Twain', 'Rafting', 601), ('Feynman', 'Physics', 95), ('Hamilton', 'Mythology', 144)]
+
+for c,v,e in library:
+   print(f'{c} {v} {e}')# eu não sabia dessa aqui nao
+
+
+Para pegar todos os primeiros elementos dos vetores 
+for book in library:
+   print(f'O autor dos livros é {book[0]}')
+
+Assim você pega os elementos da primeira matriz e faz uma lista organizada , tomando ela como base ( os {} são para falar quantos espaços serão dedicados para cada elemento desse array)
+library = [('Author', 'Topic', 'Pages'), ('Twain', 'Rafting', 601), ('Feynman', 'Physics', 95), ('Hamilton', 'Mythology', 144)]
+for author, topic, pages, in library:
+   print(f'{author:{10}} {topic:{30}} {pages:{10}}')  se você colocar {pages:>{10}} você corrige o erro de espaçamento entre o último elemento do array . {pages:.>{10}} se colocar um caractere entre o :> ele vai reproduzir esse caractere em todos os espaços em branco
+
+https://strftime.org/ para formatação de data/hora
+
+today = datetime(year = 2020, month=1,day=20)
+print(f'{today}:') nos entrega a data preestabelecida e você pode escolher o formato usando o site acima 
+
+
+Com o comando ‘pwb’ você descobre em que pasta estou localizado(jupter)
+myfile = open('D://Downloads//texte.txt')
+
+
+manipulador = open ('D://Downloads//texte.txt','r')
+print('Metodo read():')
+print(manipulador.read())
+
+manipulador.seek(0) print('Metodo readlines()')#volta para o começo da linha no arquivo, pois toda vez que ele lê o arquivo de texto ele marca com um ponteiro onde ele parou
+
+
+print(manipulador.readline())  este comanda irá ler somente uma linha do texto
+
+manipulador.close() você precisa fechar o arquivo, porque no python pode dar algum erro caso você tente abrir outro arquivo ou o mesmo arquivo novamente e não tenha encerrado o arquivo
+
+Manipulador = open(‘test.txt’,’w+’)# voce passa o segundo parâmetro depois do nome do arquivo para falar oq ue quer fazer. Se deixar só o nome do arquivo somente sera possivel ler e não editar
+
+W+ = sobrescreve todo o conteudo / A+ = adiciona texto ou cria um novo arquivo caso erre o nome do arquivo 
+
+
+#Fatiamento de frase, frase[9:21] - vai de 0 ate a letra 20.
+# frase [:5] - vai do zero ate o 4.
+# frase[15:] - vai da 15 ate o ultimo caractere.
+# frase[9::3] - vai começar no 9 e vai ate o final e pula de 3 em 3
+#len(frase) - mostra o tamanho da string.
+# frase.count('o') - vai contar quantas vezes tem a letra 'o'.
+# frase.count( 'o',0,13) - procura letras 'o' do zero ate o 12.
+# frase.find('deo') -  vai indicar onde ele começa a frase 'deo' na string.
+# 'curso' in frase - se tiver a palavra curso dentro da lista frase ele devolve true.
+# frasse.replace( 'python', 'android') -  ele substitui a palavra python por android.
+# frase.upper() - ele coloca todas as letras para maiusculo .
+# frase.lower() - coloca todas as letras para minusculo.
+# frase.capitalize() -  todos os caracteres ficam tudo minusculo e a primeira letra fica maiuscula.
+# frase.title() -  ele vai capitalizar todas as primeira letra de toda palavra depois dos espaços.
+# frase.strip() -  ele tira todos os espaços no começo e no fim da string.
+# frase.lstrip() ou frase.rstrip() - tira os espaços da direita ou esquerda.
+# frase.split() - divide sua string nos espaços em uma lista com todas essas palavras em novas strings ou inves de uma string só.
+# '-'.join(frase) - ele coloca o caractere entre as aspas nos espaços.
+
+frase = 'felipe é gostoseaum'
+print(len(frase))
+dividido = frase.split()
+print(dividido[0][3])
+print(len(dividido))
+teste = ''.join(dividido)
+print(len(teste))
+print(frase[:5])
+
+

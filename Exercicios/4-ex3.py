@@ -7,5 +7,5 @@ for i, lb, rv in df.itertuples():
     if type(rv) == str:
         if rv.isspace():
             blanks.append(i)
-df.dropna(blanks, inplace=True)
-print(df)
+df.dropna(inplace=True)
+print(df.isnull().sum())

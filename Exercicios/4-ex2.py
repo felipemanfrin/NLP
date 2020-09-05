@@ -10,3 +10,6 @@ for i, lb, rv in df.itertuples():
       if rv.isspace():
           blanks.append(i)
 print(len(blanks))
+
+
+#no resultado review temos 20 valores missing

@@ -37,28 +37,57 @@ nlp = spacy.load('en_core_web_lg')
 
 import nltk
 # nltk.download('vader_lexicon')
-from numpy import np
-from nltk.sentiment.vader import SentimentIntensityAnalyzer
-sid = SentimentIntensityAnalyzer()
-a = "This is a good movie"
-b = 'This was the best, most awesome movie EVER MADE!!@!'
-print(sid.polarity_scores(a))
-print(sid.polarity_scores(b))
+
+# from nltk.sentiment.vader import SentimentIntensityAnalyzer
+# sid = SentimentIntensityAnalyzer()
+# a = "This is a good movie"
+# b = 'This was the best, most awesome movie EVER MADE!!@!'
+# print(sid.polarity_scores(a))
+# print(sid.polarity_scores(b))
+# import pandas as pd
+# df = pd.read_csv('textos/amazonreviews.tsv', sep='\t')
+# print(df.head())
+# print(df['label'].value_counts())
+# df.dropna(inplace=True)
+# blanks = []
+# for i, lb, rv in df.itertuples():
+#     if type == str:
+#         if rv.isspace():
+#             blanks.append()
+# #df.drop(blanks, inplace=True) se precisar tirar alguma coisa faltando
+# print(df.iloc[0]['review'])
+# print(sid.polarity_scores(df.iloc[0]['review']))
+# df['scores'] = df['review'].apply(lambda review: sid.polarity_scores(review))
+# df['compound'] = df['scores'].apply(lambda d:d['compound'])
+# print(df.head())
+# df['comp_score'] = df['compound'].apply(lambda score: 'pos' if score >=0 else 'neg')
+# print(df.head())
+# from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+# print(accuracy_score(df['label'], df['comp_score']))
+# print(classification_report(df['label'], df['comp_score']))
+# print(confusion_matrix(df['label'], df['comp_score']))
+import numpy as np
 import pandas as pd
-df = pd.read_csv('textos/amazonreviews.tsv', sep='\t')
+df = pd.read_csv('textos/moviereviews.tsv', sep='\t')
 print(df.head())
-print(df['label'].value_counts())
 df.dropna(inplace=True)
 blanks = []
 for i, lb, rv in df.itertuples():
-    if type == str:
+    if type(rv) == str:
         if rv.isspace():
-            blanks.append()
-#df.drop(blanks, inplace=True) se precisar tirar alguma coisa faltando
-print(df.iloc[0]['review'])
-print(sid.polarity_scores(df.iloc[0]['review']))
+            blanks.append(i)
+print(blanks)
+df.drop(blanks, inplace=True)
+print(df['label'].value_counts())
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
+sid = SentimentIntensityAnalyzer()
 df['scores'] = df['review'].apply(lambda review: sid.polarity_scores(review))
 df['compound'] = df['scores'].apply(lambda d:d['compound'])
 print(df.head())
+df['comp_score'] = df['compound'].apply(lambda score: 'pos' if score >= 0 else 'neg')
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+print(accuracy_score(df['label'], df['comp_score']))
+print(classification_report(df['label'], df['comp_score']))
+print(confusion_matrix(df['label'], df['comp_score']))
 
 
